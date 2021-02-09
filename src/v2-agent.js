@@ -254,7 +254,11 @@ class V2Agent {
         responseJson.triggerEndOfConversation = this.agent.endConversation_;
       }
       debug('Response to Dialogflow: ' + JSON.stringify(responseJson));
-      this.agent.response_.json(responseJson);
+      if (typeof this.agent.response_.json !== 'undefined') {
+        this.agent.response_.json(responseJson);
+      } else {
+        this.agent.response_.send(responseJson);
+      }
     }
   }
 
